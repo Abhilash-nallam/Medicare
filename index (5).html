@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediCare Connect — Healthcare Support Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0F6E56;
+    --teal-light: #E1F5EE;
+    --teal-mid: #1D9E75;
+    --teal-dark: #085041;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --text: #1a1a1a;
+    --text-muted: #5a6474;
+    --surface: #f8faf9;
+    --white: #ffffff;
+    --border: #d4e6de;
+    --border-light: #eaf4ef;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --shadow: 0 2px 16px rgba(15,110,86,0.08);
+    --shadow-lg: 0 8px 40px rgba(15,110,86,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--teal-dark);
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--teal);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--teal);
+  }
+
+  .nav-cta {
+    background: var(--teal);
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--teal-dark) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 60%, #2db88a 100%);
+    color: white;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 600px;
+    height: 600px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #9FE1CB;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-primary {
+    background: white;
+    color: var(--teal-dark);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+  /* STATS */
+  .stats {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat strong {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--teal);
+  }
+
+  .stat span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 840px) {
+    .main { grid-template-columns: 1fr; }
+  }
+
+  /* TABS */
+  .tabs-header {
+    display: flex;
+    gap: 4px;
+    background: var(--border-light);
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+    background: white;
+    color: var(--teal-dark);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* CARD */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+  }
+
+  .card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--teal-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .card .subtitle {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 1.8rem;
+    line-height: 1.5;
+  }
+
+  /* FORM */
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  label .req { color: var(--red); margin-left: 2px; }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--teal-mid);
+    box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+  }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: var(--teal);
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .submit-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+
+  /* SUCCESS */
+  .success-banner {
+    display: none;
+    background: var(--teal-light);
+    border: 1px solid #5DCAA5;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--teal-dark);
+    font-weight: 500;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .success-banner.show { display: flex; }
+
+  /* SEVERITY */
+  .severity-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .pill {
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    background: white;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+
+  .pill.selected-low { background: #EAF3DE; border-color: #639922; color: #3B6D11; }
+  .pill.selected-med { background: var(--amber-light); border-color: var(--amber); color: #633806; }
+  .pill.selected-high { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+  /* CHATBOT SIDEBAR */
+  .chatbot-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    position: sticky;
+    top: 80px;
+  }
+
+  .chat-header {
+    background: var(--teal);
+    padding: 1.2rem 1.5rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .chat-avatar {
+    width: 42px;
+    height: 42px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .chat-header-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .chat-header-info p {
+    font-size: 0.78rem;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .online-dot {
+    width: 7px;
+    height: 7px;
+    background: #9FE1CB;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .chat-messages {
+    padding: 1.2rem;
+    min-height: 280px;
+    max-height: 360px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--surface);
+  }
+
+  .msg {
+    max-width: 86%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .msg.bot {
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+  }
+
+  .msg.user {
+    background: var(--teal);
+    color: white;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+
+  .msg.typing {
+    background: white;
+    border: 1px solid var(--border);
+    align-self: flex-start;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.8rem;
+  }
+
+  .quick-replies {
+    padding: 0.75rem 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-top: 1px solid var(--border-light);
+    background: white;
+  }
+
+  .qr-btn {
+    background: var(--teal-light);
+    color: var(--teal-dark);
+    border: 1px solid #5DCAA5;
+    padding: 5px 11px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .qr-btn:hover { background: var(--teal); color: white; border-color: var(--teal); }
+
+  .chat-input-area {
+    display: flex;
+    gap: 8px;
+    padding: 1rem 1.2rem;
+    border-top: 1px solid var(--border);
+    background: white;
+  }
+
+  .chat-input-area input {
+    flex: 1;
+    padding: 9px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    font-size: 0.85rem;
+  }
+
+  .send-btn {
+    width: 38px;
+    height: 38px;
+    background: var(--teal);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+
+  .send-btn:hover { background: var(--teal-dark); }
+
+  /* SUMMARY CARD */
+  .ai-summary {
+    background: var(--amber-light);
+    border: 1px solid #EF9F27;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #412402;
+    display: none;
+  }
+
+  .ai-summary.show { display: block; }
+  .ai-summary strong { display: block; margin-bottom: 4px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--amber); }
+
+  /* SERVICES */
+  .services {
+    background: var(--teal-light);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .services h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--teal-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .services p {
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    text-align: left;
+    transition: box-shadow 0.2s;
+  }
+
+  .service-card:hover { box-shadow: var(--shadow-lg); }
+
+  .service-icon {
+    font-size: 28px;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--teal-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .service-card p {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--teal-dark);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: white; }
+
+  /* URGENCY TAG */
+  .urgency-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+
+  .urgency-high { background: var(--red-light); color: var(--red); }
+  .urgency-med { background: var(--amber-light); color: var(--amber); }
+  .urgency-low { background: #EAF3DE; color: #3B6D11; }
+
+  /* PROGRESS */
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 0;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+  }
+
+  .step-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: white;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step.active .step-num { border-color: var(--teal); color: var(--teal); background: var(--teal-light); }
+  .step.done .step-num { background: var(--teal); border-color: var(--teal); color: white; }
+
+  .step-label { font-size: 0.72rem; color: var(--text-muted); }
+  .step.active .step-label, .step.done .step-label { color: var(--teal-dark); }
+
+  .step-line { flex: 1; height: 2px; background: var(--border); margin-top: -18px; }
+  .step-line.done { background: var(--teal); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-icon">✚</div>
+    MediCare Connect
+  </a>
+  <ul class="nav-links">
+    <li><a href="#forms" class="active">Get Help</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#" onclick="openTab('volunteer'); scrollTo(0,600); return false;">Volunteer</a></li>
+    <li><a href="#forms" class="nav-cta">Register Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🌿 Trusted by 2,400+ patients across 12 districts</div>
+  <h1>Healthcare support for <em>every community</em></h1>
+  <p>Connect with medical volunteers, request health assistance, or join our network of care. Free, accessible, and community-driven.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('forms').scrollIntoView({behavior:'smooth'})">Request Support</button>
+    <button class="btn-outline" onclick="openTab('volunteer'); document.getElementById('forms').scrollIntoView({behavior:'smooth'})">Become a Volunteer</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><strong>2,400+</strong><span>Patients Supported</span></div>
+  <div class="stat"><strong>340</strong><span>Active Volunteers</span></div>
+  <div class="stat"><strong>12</strong><span>Districts Covered</span></div>
+  <div class="stat"><strong>98%</strong><span>Satisfaction Rate</span></div>
+</div>
+
+<!-- MAIN FORM + CHATBOT -->
+<section class="main" id="forms">
+  <div class="left-col">
+
+    <!-- TABS -->
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="openTab('patient')">🏥 Patient Support</button>
+      <button class="tab-btn" onclick="openTab('volunteer')">🤝 Volunteer Registration</button>
+      <button class="tab-btn" onclick="openTab('contact')">✉️ Contact Us</button>
+    </div>
+
+    <!-- PATIENT TAB -->
+    <div class="tab-content active" id="tab-patient">
+      <div class="card">
+        <div id="success-patient" class="success-banner">
+          ✅ Your request has been received. A coordinator will contact you within 2 hours.
+        </div>
+
+        <h2>Request Medical Support</h2>
+        <p class="subtitle">Fill in your details below. Our AI triage system will prioritize your case and connect you with the right support.</p>
+
+        <div class="progress-steps">
+          <div class="step done"><div class="step-num">1</div><span class="step-label">Info</span></div>
+          <div class="step-line done"></div>
+          <div class="step active"><div class="step-num">2</div><span class="step-label">Needs</span></div>
+          <div class="step-line"></div>
+          <div class="step"><div class="step-num">3</div><span class="step-label">Submit</span></div>
+        </div>
+
+        <form id="patientForm" onsubmit="submitPatient(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name <span class="req">*</span></label>
+              <input type="text" placeholder="e.g. Ravi Kumar" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number <span class="req">*</span></label>
+              <input type="tel" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Age</label>
+              <input type="number" placeholder="35" min="0" max="120">
+            </div>
+            <div class="form-group">
+              <label>District / Location <span class="req">*</span></label>
+              <input type="text" placeholder="e.g. Warangal" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Type of Support Needed <span class="req">*</span></label>
+            <select required>
+              <option value="">Select support type...</option>
+              <option>Doctor Consultation</option>
+              <option>Medicine / Pharmacy Help</option>
+              <option>Mental Health Support</option>
+              <option>Emergency Transport</option>
+              <option>Post-Surgery Care</option>
+              <option>Disability Assistance</option>
+              <option>Nutrition & Diet Support</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Urgency Level <span class="req">*</span></label>
+            <div class="severity-pills">
+              <span class="pill" onclick="selectSeverity(this,'low','selected-low')">🟢 Low — Can wait a few days</span>
+              <span class="pill" onclick="selectSeverity(this,'med','selected-med')">🟡 Medium — Within 24 hours</span>
+              <span class="pill" onclick="selectSeverity(this,'high','selected-high')">🔴 High — Immediate help needed</span>
+            </div>
+            <input type="hidden" id="severityVal">
+          </div>
+
+          <div class="form-group">
+            <label>Describe your situation</label>
+            <textarea placeholder="Briefly describe your health concern or what kind of help you need..."></textarea>
+          </div>
+
+          <!-- AI Summary Box -->
+          <div class="ai-summary" id="aiSummary">
+            <strong>🤖 AI Triage Summary</strong>
+            <span id="aiSummaryText"></span>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Submit Request ↗
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- VOLUNTEER TAB -->
+    <div class="tab-content" id="tab-volunteer">
+      <div class="card">
+        <div id="success-volunteer" class="success-banner">
+          ✅ Thank you for volunteering! We'll send your onboarding kit within 24 hours.
+        </div>
+
+        <h2>Volunteer Registration</h2>
+        <p class="subtitle">Join our network of healthcare volunteers. Whether you're a doctor, nurse, student, or community helper — we need you.</p>
+
+        <form id="volunteerForm" onsubmit="submitVolunteer(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name <span class="req">*</span></label>
+              <input type="text" placeholder="e.g. Dr. Priya Sharma" required>
+            </div>
+            <div class="form-group">
+              <label>Email Address <span class="req">*</span></label>
+              <input type="email" placeholder="priya@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone Number <span class="req">*</span></label>
+              <input type="tel" placeholder="+91 98765 43210" required>
+            </div>
+            <div class="form-group">
+              <label>Professional Role <span class="req">*</span></label>
+              <select required>
+                <option value="">Select role...</option>
+                <option>Medical Doctor (MBBS/MD)</option>
+                <option>Nurse / Nursing Student</option>
+                <option>Pharmacist</option>
+                <option>Medical Student</option>
+                <option>Social Worker</option>
+                <option>Driver / Transport</option>
+                <option>Community Volunteer</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Areas you can help with</label>
+            <div class="checkbox-group">
+              <label class="checkbox-item"><input type="checkbox"> General Health Consultations</label>
+              <label class="checkbox-item"><input type="checkbox"> Mental Health & Counseling</label>
+              <label class="checkbox-item"><input type="checkbox"> Medicine Distribution</label>
+              <label class="checkbox-item"><input type="checkbox"> Home Visits (elderly/disabled)</label>
+              <label class="checkbox-item"><input type="checkbox"> Health Camps & Awareness</label>
+              <label class="checkbox-item"><input type="checkbox"> Emergency Response</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Availability</label>
+            <select>
+              <option>Weekends only</option>
+              <option>Weekdays (part-time)</option>
+              <option>Full-time</option>
+              <option>On-call (emergencies only)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Anything else you'd like us to know?</label>
+            <textarea placeholder="Languages spoken, specific expertise, special equipment, etc."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Join as Volunteer ↗</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- CONTACT TAB -->
+    <div class="tab-content" id="tab-contact">
+      <div class="card">
+        <div id="success-contact" class="success-banner">
+          ✅ Message sent! We typically respond within 4 business hours.
+        </div>
+
+        <h2>Contact & General Enquiry</h2>
+        <p class="subtitle">Reach out for partnerships, media enquiries, or any questions about our programs.</p>
+
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name <span class="req">*</span></label>
+              <input type="text" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" placeholder="you@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Subject <span class="req">*</span></label>
+            <select required>
+              <option value="">Select topic...</option>
+              <option>NGO Partnership</option>
+              <option>Donation / Funding</option>
+              <option>Media Enquiry</option>
+              <option>General Question</option>
+              <option>Feedback / Complaint</option>
+              <option>Technical Issue</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Message <span class="req">*</span></label>
+            <textarea placeholder="Type your message here..." style="min-height:130px;" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message ↗</button>
+        </form>
+      </div>
+    </div>
+
+  </div><!-- end left -->
+
+  <!-- CHATBOT SIDEBAR -->
+  <div class="right-col">
+    <div class="chatbot-card">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info">
+          <h3>MediBot — Health FAQ Assistant</h3>
+          <p><span class="online-dot"></span> AI-powered · Always available</p>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot">
+          Hi! I'm MediBot 👋 I can answer your health-related questions and help you navigate our services.<br><br>What would you like to know?
+        </div>
+      </div>
+
+      <div class="quick-replies">
+        <button class="qr-btn" onclick="quickReply('How do I register as a patient?')">How to register?</button>
+        <button class="qr-btn" onclick="quickReply('What services do you offer?')">Services</button>
+        <button class="qr-btn" onclick="quickReply('Is this service free?')">Is it free?</button>
+        <button class="qr-btn" onclick="quickReply('How quickly can I get help?')">Response time</button>
+        <button class="qr-btn" onclick="quickReply('I have an emergency right now')">🚨 Emergency</button>
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Ask MediBot anything..." onkeydown="if(event.key==='Enter') sendChat()">
+        <button class="send-btn" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2>Our Programs</h2>
+  <p>Comprehensive healthcare support designed for underserved communities across rural and urban areas.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🏥</span>
+      <h3>Free Consultations</h3>
+      <p>Connect with verified doctors for remote or in-person consultations at no cost.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💊</span>
+      <h3>Medicine Access</h3>
+      <p>Assistance with procuring essential medicines for BPL card holders and seniors.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧠</span>
+      <h3>Mental Wellness</h3>
+      <p>Confidential counseling sessions with trained mental health volunteers.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🚑</span>
+      <h3>Emergency Response</h3>
+      <p>24/7 emergency coordination and transport assistance for critical cases.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">👩‍⚕️</span>
+      <h3>Home Care Visits</h3>
+      <p>Volunteers visit elderly and differently-abled patients who cannot travel.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📊</span>
+      <h3>Health Camps</h3>
+      <p>Regular community health camps for screenings, vaccinations, and awareness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>MediCare Connect</strong> — A community healthcare NGO support platform<br>
+  <span style="font-size:0.78rem; margin-top:6px; display:block;">Built with HTML · CSS · JavaScript · AI FAQ Chatbot</span>
+</footer>
+
+<script>
+  // TAB SWITCHING
+  function openTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    const btns = document.querySelectorAll('.tab-btn');
+    const idx = name === 'patient' ? 0 : name === 'volunteer' ? 1 : 2;
+    btns[idx].classList.add('active');
+  }
+
+  // SEVERITY PILLS
+  let selectedSeverity = '';
+  function selectSeverity(el, val, cls) {
+    document.querySelectorAll('.pill').forEach(p => p.className = 'pill');
+    el.classList.add(cls);
+    selectedSeverity = val;
+    document.getElementById('severityVal').value = val;
+    updateAISummary();
+  }
+
+  // AI TRIAGE SUMMARY (auto-generated based on form fields)
+  function updateAISummary() {
+    if (!selectedSeverity) return;
+    const summaries = {
+      high: '⚡ HIGH PRIORITY — This request will be escalated immediately to our emergency coordinator. Please keep your phone available. If life-threatening, call 108 now.',
+      med: '⏰ MEDIUM PRIORITY — A volunteer coordinator will contact you within 4–6 hours to schedule support. You can also message MediBot for guidance.',
+      low: '📋 STANDARD QUEUE — Your request is logged. A volunteer will reach out within 48 hours. You can use MediBot below for immediate self-help tips.'
+    };
+    document.getElementById('aiSummaryText').textContent = summaries[selectedSeverity];
+    document.getElementById('aiSummary').classList.add('show');
+  }
+
+  // FORM SUBMISSIONS
+  function submitPatient(e) {
+    e.preventDefault();
+    if (!selectedSeverity) { alert('Please select an urgency level.'); return; }
+    document.getElementById('success-patient').classList.add('show');
+    e.target.reset();
+    document.querySelectorAll('.pill').forEach(p => p.className = 'pill');
+    document.getElementById('aiSummary').classList.remove('show');
+    selectedSeverity = '';
+    window.scrollTo({ top: document.getElementById('forms').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  function submitVolunteer(e) {
+    e.preventDefault();
+    document.getElementById('success-volunteer').classList.add('show');
+    e.target.reset();
+    window.scrollTo({ top: document.getElementById('forms').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  function submitContact(e) {
+    e.preventDefault();
+    document.getElementById('success-contact').classList.add('show');
+    e.target.reset();
+    window.scrollTo({ top: document.getElementById('forms').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  // CHATBOT FAQ LOGIC
+  const faqs = [
+    { k: ['register','sign up','how to join','enroll'], a: '📋 To register as a patient, just fill out the "Patient Support" form on the left. It takes about 2 minutes. Once submitted, our team will contact you within 2 hours.' },
+    { k: ['free','cost','charge','fee','money','pay'], a: '💚 Yes! All our services are completely free for patients. MediCare Connect is an NGO-funded platform. Volunteers also serve without compensation.' },
+    { k: ['volunteer','join as volunteer','become volunteer'], a: '🤝 Amazing! Click the "Volunteer Registration" tab on the left. We welcome doctors, nurses, students, drivers — anyone willing to help!' },
+    { k: ['services','offer','provide','help with','available'], a: '🏥 We offer: Free doctor consultations, Medicine access, Mental health support, Emergency transport, Home care visits, and Health camps. Which do you need?' },
+    { k: ['time','quick','fast','how long','response','when'], a: '⏱️ Response times: Emergency (High) → within 1 hour. Medium priority → 4-6 hours. Standard → within 48 hours. Emergencies are always prioritized.' },
+    { k: ['emergency','urgent','danger','critical','dying','accident'], a: '🚨 If it\'s a life-threatening emergency, CALL 108 (Ambulance) immediately!\n\nFor urgent (non-life-threatening) cases, select "High" urgency in the patient form and our coordinator will call you within the hour.' },
+    { k: ['mental','anxiety','depression','stress','counseling','therapy'], a: '🧠 Yes, we have trained mental health volunteers. Select "Mental Health Support" in the patient form. All sessions are 100% confidential.' },
+    { k: ['medicine','pharmacy','drug','tablet','prescription'], a: '💊 We assist BPL card holders and seniors with procuring essential medicines. Fill the patient form and select "Medicine / Pharmacy Help".' },
+    { k: ['location','district','area','where','coverage'], a: '📍 We currently operate in 12 districts. Fill your district name in the patient form and we\'ll confirm if we have volunteers near you.' },
+    { k: ['contact','reach','phone','email','call'], a: '📞 You can use this form, message MediBot, or reach us at:\n📧 help@medicareconnect.org\n📱 1800-XXX-XXXX (toll-free)' },
+  ];
+
+  function getBotReply(msg) {
+    const lc = msg.toLowerCase();
+    for (const faq of faqs) {
+      if (faq.k.some(k => lc.includes(k))) return faq.a;
+    }
+    // Default
+    if (lc.includes('thank')) return '😊 You\'re welcome! Is there anything else I can help you with?';
+    if (lc.includes('hello') || lc.includes('hi') || lc.includes('hey')) return 'Hello! 👋 How can I help you today? You can ask about our services, registration, or anything else.';
+    return '🤔 I\'m not sure about that specific question. For detailed help, please:\n1. Use the forms on the left\n2. Call our helpline: 1800-XXX-XXXX\n3. Email: help@medicareconnect.org\n\nWould you like to know about our services, registration, or response times?';
+  }
+
+  function addMsg(text, type) {
+    const box = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = 'msg ' + type;
+    div.innerText = text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function sendChat() {
+    const inp = document.getElementById('chatInput');
+    const msg = inp.value.trim();
+    if (!msg) return;
+    addMsg(msg, 'user');
+    inp.value = '';
+
+    // Typing indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'msg typing';
+    typingDiv.id = 'typing';
+    typingDiv.innerText = 'MediBot is typing…';
+    document.getElementById('chatMessages').appendChild(typingDiv);
+    document.getElementById('chatMessages').scrollTop = 9999;
+
+    setTimeout(() => {
+      document.getElementById('typing')?.remove();
+      addMsg(getBotReply(msg), 'bot');
+    }, 900 + Math.random() * 600);
+  }
+
+  function quickReply(text) {
+    document.getElementById('chatInput').value = text;
+    sendChat();
+  }
+</script>
+</body>
+</html>
