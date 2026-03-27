@@ -2,8 +2,7 @@
 
 A Mini Healthcare Support Web App for NGO use — built for a hackathon/internship submission.
 
-**Live Demo:** _(Deploy to Netlify/Vercel and paste link here)_  
-**GitHub:** _(Your repo link here)_
+
 
 ---
 
@@ -24,7 +23,7 @@ MediCare Connect is a community healthcare support platform that connects patien
 |-------|-----------|
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Fonts | Google Fonts (DM Serif Display + DM Sans) |
-| Hosting | Netlify / Vercel / GitHub Pages (static) |
+| Hosting |  GitHub Pages (static) |
 | Backend | None required (pure client-side) |
 
 **Single-file app** — entire app is in `index.html`. No build step, no dependencies, no npm.
@@ -72,19 +71,6 @@ The platform works entirely in a browser — no installation, works on 2G, no sm
 
 ---
 
-## How to Deploy (Netlify — Fastest Option)
-
-1. Go to [netlify.com](https://netlify.com) → Log in
-2. Drag and drop the `index.html` file (or the folder)
-3. Netlify gives you a free live URL instantly
-4. Done — share the link!
-
-Or use GitHub Pages:
-1. Push `index.html` to a GitHub repo
-2. Settings → Pages → Deploy from main branch
-3. Your site is live at `https://yourusername.github.io/repo-name`
-
----
 
 ## Features Checklist
 
